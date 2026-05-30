@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}首页 - 电商后台管理系统{% endblock %}
+
+{% block content %}
+<!-- 首页使用 Bootstrap 卡片布局 -->
+<div class="mb-4">
+    <h1 class="fw-bold">电商后台管理系统</h1>
+    {% if username %}
+    <div class="alert alert-success mt-3">
+        欢迎回来，{{ username }}（{{ "管理员" if current_role == "admin" else "普通用户" }}）！
+    </div>
+    {% else %}
+    <div class="alert alert-info mt-3">当前用户：未登录，请登录后进行下单和查看个人订单。</div>
+    {% endif %}
+</div>
+
+<div class="row g-4">
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">用户管理</h5>
+                {% if current_role == "admin" %}
+                <p class="card-text text-muted">查看系统中的所有用户和角色。</p>
+                <a class="btn btn-primary" href="{{ url_for('users') }}">进入用户管理</a>
+                {% elif username %}
+                <p class="card-text text-muted">当前账号已登录，可随时退出登录。</p>
+                <a class="btn btn-outline-danger" href="{{ url_for('logout') }}">退出登录</a>
+                {% else %}
+                <p class="card-text text-muted">注册账号或登录系统后使用购物车和订单功能。</p>
+                <a class="btn btn-primary" href="{{ url_for('login') }}">用户登录</a>
+                <a class="btn btn-outline-primary ms-2" href="{{ url_for('register') }}">用户注册</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">商品管理</h5>
+                <p class="card-text text-muted">
+                    {% if current_role == "admin" %}
+                    管理商品信息，添加、修改或删除商品。
+                    {% else %}
+                    查看商品列表，并将商品加入购物车。
+                    {% endif %}
+                </p>
+                <a class="btn btn-primary" href="{{ url_for('products') }}">进入商品管理</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">订单管理</h5>
+                <p class="card-text text-muted">
+                    {% if current_role == "admin" %}
+                    查看全部订单，并修改订单状态。
+                    {% else %}
+                    下单并查看自己的订单。
+                    {% endif %}
+                </p>
+                {% if current_role != "admin" %}
+                <a class="btn btn-outline-primary me-2" href="{{ url_for('cart') }}">查看购物车</a>
+                {% endif %}
+                <a class="btn btn-primary" href="{{ url_for('orders') }}">进入订单管理</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

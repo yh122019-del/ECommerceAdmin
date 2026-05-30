@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}页面不存在{% endblock %}
+
+{% block content %}
+<!-- 404 页面，用于提示用户访问的页面不存在 -->
+<div class="row justify-content-center">
+    <div class="col-md-7">
+        <div class="card shadow-sm text-center">
+            <div class="card-body p-5">
+                <h1 class="display-5 fw-bold">404</h1>
+                <p class="lead text-muted">页面不存在，请检查访问地址。</p>
+                <a class="btn btn-primary" href="{{ url_for('index') }}">返回首页</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

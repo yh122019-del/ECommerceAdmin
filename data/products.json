@@ -1,0 +1,20 @@
+[
+    {
+        "product_id": "12",
+        "name": "123",
+        "price": 7.857,
+        "stock": 0
+    },
+    {
+        "product_id": "18",
+        "name": "蔷薇",
+        "price": 478.0,
+        "stock": 47
+    },
+    {
+        "product_id": "7",
+        "name": "电影票",
+        "price": 45.23,
+        "stock": 789
+    }
+]

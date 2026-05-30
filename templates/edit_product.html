@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}修改商品{% endblock %}
+
+{% block content %}
+<!-- 管理员修改商品信息页面 -->
+<div class="row justify-content-center">
+    <div class="col-md-7 col-lg-6">
+        <div class="card shadow-sm">
+            <div class="card-body p-4">
+                <h1 class="fw-bold mb-4">修改商品</h1>
+
+                {% if message %}
+                <div class="alert alert-danger">{{ message }}</div>
+                {% endif %}
+
+                <form method="post" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label class="form-label">商品编号</label>
+                        <input class="form-control" type="text" value="{{ product.product_id }}" disabled>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">商品名称</label>
+                        <input class="form-control" type="text" name="name" value="{{ product.name }}" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">价格</label>
+                        <input class="form-control" type="number" name="price" step="0.01" min="0" value="{{ product.price }}" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">库存</label>
+                        <input class="form-control" type="number" name="stock" min="0" value="{{ product.stock }}" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label">更换商品图片</label>
+                        <input class="form-control" type="file" name="image" accept="image/*">
+                        <div class="form-text">不上传新图片时，将保留原图片。</div>
+                    </div>
+
+                    <button class="btn btn-primary" type="submit">保存修改</button>
+                    <a class="btn btn-outline-secondary ms-2" href="{{ url_for('products') }}">返回商品列表</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

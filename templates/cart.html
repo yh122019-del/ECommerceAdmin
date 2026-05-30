@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}购物车{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <div>
+        <h1 class="fw-bold mb-1">购物车</h1>
+        <p class="text-muted mb-0">查看已加入购物车的商品，并一键生成订单。</p>
+    </div>
+    <a class="btn btn-outline-primary" href="{{ url_for('products') }}">继续选购</a>
+</div>
+
+<!-- 购物车商品列表，使用 Bootstrap 表格美化 -->
+<div class="card shadow-sm">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover align-middle mb-0">
+                <thead class="table-primary">
+                    <tr>
+                        <th>商品编号</th>
+                        <th>商品名称</th>
+                        <th>单价</th>
+                        <th>数量</th>
+                        <th>小计</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cart_items %}
+                    <tr>
+                        <td>{{ item.product_id }}</td>
+                        <td>{{ item.product_name }}</td>
+                        <td>{{ item.price }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.price * item.quantity }}</td>
+                        <td>
+                            <!-- 删除购物车商品 -->
+                            <form method="post" action="{{ url_for('delete_cart_item', item_index=loop.index0) }}">
+                                <button class="btn btn-sm btn-outline-danger" type="submit">删除</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td class="text-center text-muted" colspan="6">购物车为空</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mt-4">
+            <h5 class="mb-0">合计：{{ total_price }}</h5>
+
+            <!-- 一键生成订单 -->
+            <form method="post" action="{{ url_for('checkout_cart') }}">
+                <button class="btn btn-primary" type="submit" {% if not cart_items %}disabled{% endif %}>
+                    一键生成订单
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

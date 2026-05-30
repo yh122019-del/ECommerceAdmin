@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}用户登录{% endblock %}
+
+{% block content %}
+<!-- 登录表单居中显示 -->
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+        <div class="card shadow-sm">
+            <div class="card-body p-4">
+                <h1 class="fw-bold mb-4">用户登录</h1>
+
+                {% if message %}
+                <div class="alert alert-danger">{{ message }}</div>
+                {% endif %}
+
+                <form method="post">
+                    <div class="mb-3">
+                        <label class="form-label">用户名</label>
+                        <input class="form-control" type="text" name="username" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label">密码</label>
+                        <input class="form-control" type="password" name="password" required>
+                    </div>
+
+                    <button class="btn btn-primary" type="submit">登录</button>
+                    <a class="btn btn-outline-primary ms-2" href="{{ url_for('register') }}">去注册</a>
+                    <a class="btn btn-outline-secondary ms-2" href="{{ url_for('index') }}">返回首页</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}订单管理{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <div>
+        <h1 class="fw-bold mb-1">{% if current_role == "admin" %}订单管理{% else %}我的订单{% endif %}</h1>
+        <p class="text-muted mb-0">当前用户：{{ username }}</p>
+    </div>
+    {% if current_role == "user" %}
+    <a class="btn btn-primary" href="{{ url_for('add_order') }}">用户下单</a>
+    {% endif %}
+</div>
+
+<!-- 订单列表使用 Bootstrap 表格，管理员可以修改订单状态 -->
+<div class="card shadow-sm">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover align-middle mb-0">
+                <thead class="table-primary">
+                    <tr>
+                        <th>订单编号</th>
+                        <th>用户名</th>
+                        <th>商品编号</th>
+                        <th>商品名称</th>
+                        <th>购买数量</th>
+                        <th>订单总价</th>
+                        <th>订单状态</th>
+                        {% if current_role == "admin" %}
+                        <th>操作</th>
+                        {% endif %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                    <tr>
+                        <td>{{ order.order_id }}</td>
+                        <td>{{ order.username }}</td>
+                        <td>{{ order.product_id }}</td>
+                        <td>{{ order.product_name }}</td>
+                        <td>{{ order.quantity }}</td>
+                        <td>{{ order.total_price }}</td>
+                        <td><span class="badge text-bg-success">{{ order.status }}</span></td>
+                        {% if current_role == "admin" %}
+                        <td>
+                            <!-- 管理员修改订单状态 -->
+                            <form class="d-flex gap-2" method="post" action="{{ url_for('update_order_status', order_id=order.order_id) }}">
+                                <select class="form-select form-select-sm" name="status">
+                                    <option value="已下单" {% if order.status == "已下单" %}selected{% endif %}>已下单</option>
+                                    <option value="已支付" {% if order.status == "已支付" %}selected{% endif %}>已支付</option>
+                                    <option value="已发货" {% if order.status == "已发货" %}selected{% endif %}>已发货</option>
+                                    <option value="已完成" {% if order.status == "已完成" %}selected{% endif %}>已完成</option>
+                                    <option value="已取消" {% if order.status == "已取消" %}selected{% endif %}>已取消</option>
+                                </select>
+                                <button class="btn btn-sm btn-outline-primary" type="submit">保存</button>
+                            </form>
+                        </td>
+                        {% endif %}
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td class="text-center text-muted" colspan="{% if current_role == 'admin' %}8{% else %}7{% endif %}">暂无订单</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

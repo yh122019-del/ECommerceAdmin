@@ -1,0 +1,22 @@
+[
+    {
+        "username": "蔷薇",
+        "password": "123",
+        "role": "user"
+    },
+    {
+        "username": "去玩儿",
+        "password": "scrypt:32768:8:1$QmptVN5yXwmhhcRJ$f0082951c527dcd50e30843e6b9e379db1c232a7efd1dbfacc761e91e4cec26cfd93b4a9eac706ab1c5cf8cc667cb9db960b9687ce26a63f05f2e4b8bf944bb5",
+        "role": "user"
+    },
+    {
+        "username": "admin",
+        "password": "scrypt:32768:8:1$kQKM5JoMkJ5TJ0SW$fe867650dafe265a5968f3069d11e5816a131c8f24b9568c1ca1b286363f6edfedd3c23622b1b7037cc70f2e4d5222427f8b0e7a6b55b138c6df7f5ede9a4a5c",
+        "role": "admin"
+    },
+    {
+        "username": "萤火",
+        "password": "scrypt:32768:8:1$YGENQT5NWZvnq1T9$9fb78ae86a5669e6eb148bffc9647276163e430fe51e3958ce82752d11c7a70e4039f3e9dc36bd9572aa4b4927069715865d02e11c69792cbb38b94d99752333",
+        "role": "user"
+    }
+]

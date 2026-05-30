@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}服务器错误{% endblock %}
+
+{% block content %}
+<!-- 500 页面，用于提示用户服务器出现异常 -->
+<div class="row justify-content-center">
+    <div class="col-md-7">
+        <div class="card shadow-sm text-center">
+            <div class="card-body p-5">
+                <h1 class="display-5 fw-bold">500</h1>
+                <p class="lead text-muted">服务器暂时出现问题，请稍后再试。</p>
+                <a class="btn btn-primary" href="{{ url_for('index') }}">返回首页</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
